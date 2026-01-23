@@ -16,12 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import JsonResponse
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+def home(request):
+    return JsonResponse({
+        "status": "ok",
+        "message": "TheGrocer API is running"
+    })
 
 urlpatterns = [
+    path('', home),
     path('products/', include('products.urls')),
     path('accounts/', include('accounts.urls')),
     path('api-auth/', include('rest_framework.urls')),
